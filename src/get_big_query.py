@@ -1,4 +1,5 @@
 from google.cloud import bigquery
+from logger.log import logger
 project_id = "biquery-286107"
 client = bigquery.Client(project_id)
 
@@ -30,7 +31,7 @@ def upload_csv(table_id):
         job = client.load_table_from_file(source_file, table_id, job_config=job_config)
     job.result()  # Waits for the job to complete.
     table = client.get_table(table_id)  # Make an API request.
-    print(
+    logger.info(
        "Loaded {} rows and {} columns to {}".format(
              table.num_rows, len(table.schema), table_id
        ))
