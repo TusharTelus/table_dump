@@ -2,14 +2,16 @@ from setuptools import setup, find_packages
 import os
 here = os.path.abspath(os.path.dirname(__file__))
 
-README = "Facebook-XMPP-Handler"
+README = "Table-DUMP"
 
 requires = [
     'pyramid==1.10.4',
     'redis==3.4.1',
-    'google-cloud-bigquery==1.26.1'
+    'google-cloud-bigquery',
     'requests==2.23.0',
-    'rq==1.4.2'
+    'rq==1.4.2',
+    'google-cloud-storage',
+    'googleapis_common_protos'
 ]
 
 setup(name='table_dump_application',
@@ -33,7 +35,7 @@ setup(name='table_dump_application',
     paster_plugins=['pyramid'],
     entry_points="""\
     [paste.app_factory]
-    main = table-dump:main
+    main = src:main
     [console_scripts]
     table_dump_start = src.get_big_query
     """,

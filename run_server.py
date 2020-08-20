@@ -2,6 +2,8 @@ from pyramid.config import Configurator
 from logger.log import logger
 from src.get_big_query import upload_csv,create_data_Set,create_schema
 import configparser
+from wsgiref.simple_server import make_server
+
 
 try:
     config = configparser.ConfigParser()
@@ -12,7 +14,7 @@ except Exception as e:
     logger.error(msg="Error occured while reading configuration from config file", exc_info=True)
 
 
-def xmpp_start():
+def server_start():
     try:
 
 
@@ -21,8 +23,8 @@ def xmpp_start():
             config.add_request_method(create_data_Set, 'create_data_Set', reify=True)
             config.add_route('upload_csv', '/upload_csv/')
             config.add_route('create_data_Set', '/create_data_Set')
-            config.add_view(upload_csv, route_name='fbbot', renderer='json', request_method=("POST", "GET"))
-            config.add_view(create_data_Set, route_name='healthCheck', renderer='json', request_method=("POST", "GET"))
+            config.add_view(upload_csv, route_name='upload_csv', renderer='json', request_method=("POST", "GET"))
+            config.add_view(create_data_Set, route_name='create_data_Set', renderer='json', request_method=("POST", "GET"))
 
             app = config.make_wsgi_app()
 

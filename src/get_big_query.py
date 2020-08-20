@@ -1,6 +1,6 @@
 from google.cloud import bigquery
 from logger.log import logger
-project_id = "biquery-286107"
+project_id = "hrbot-220907"
 client = bigquery.Client(project_id)
 
 
@@ -21,7 +21,7 @@ def create_schema(dataset_id, table_id):
     table_id = f"{table.project_id}.{table.dataset_id}.{table.table_id}"
     return table_id
 
-def upload_csv(table_id):
+def upload_csv(table_id, auto_detect = True):
     job_config = bigquery.LoadJobConfig(
              source_format = bigquery.SourceFormat.CSV, skip_leading_rows = 1, autodetect = True,
                                                                                                  )
@@ -35,7 +35,4 @@ def upload_csv(table_id):
        "Loaded {} rows and {} columns to {}".format(
              table.num_rows, len(table.schema), table_id
        ))
-
-
-
 
