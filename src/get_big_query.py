@@ -12,7 +12,7 @@ def create_data_Set(data_set_name):
 
 
 def create_schema(dataset_id, table_id):
-    table_id = project_id +"."+dataset_id+"."+table_id
+    table_id = project_id +"."+dataset_id+"."+table_idthigh
     schema = [
         bigquery.SchemaField("name", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),]
